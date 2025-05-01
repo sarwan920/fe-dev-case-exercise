@@ -11,8 +11,10 @@
       class="nav-item"
       :class="{ active: $route.path === item.route }"
     >
-      <component :is="item.icon" class="icon" :class="{ active: $route.path === item.route }" />
-      <span v-if="isExpanded">{{ item.name }}</span>
+      <span class="icon-wrapper">
+        <component :is="item.icon" class="icon" :class="{ active: $route.path === item.route }" />
+      </span>
+      <span class="link-text" v-if="isExpanded">{{ item.name }}</span>
     </router-link>
   </div>
 </template>
@@ -41,36 +43,31 @@ const navItems: NavItem[] = [
 
 <style scoped>
 .sidebar {
-  position: relative;
   background-color: #05668d;
   color: white;
-  width: 60px;
-  transition: width 0.3s ease;
+  width: 72px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  padding-top: 4rem; /* Push nav items below the toggle */
-  padding-left: 1rem;
+  padding-top: 2rem;
   overflow: hidden;
 }
 
 .sidebar.expanded {
-  width: 200px;
+  width: 240px;
   align-items: flex-start;
-  padding-left: 1rem;
 }
 
 .menu-toggle {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
   cursor: pointer;
-  /* z-index: 2; */
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
+.icon-wrapper {
+  display: inline-flex;
+  justify-content: center;
+}
 .icon {
-  /* height: 24px;
-  width: 24px; */
   color: white;
   transition: color 0.3s ease;
 }
@@ -81,6 +78,7 @@ const navItems: NavItem[] = [
 .nav-item {
   display: flex;
   align-items: center;
+  color: white;
   width: 100%;
   gap: 1rem;
   margin-bottom: 2rem;
@@ -88,26 +86,15 @@ const navItems: NavItem[] = [
   padding: 0.5rem 0rem;
   transition: all 0.3s ease;
   text-decoration: none;
+  font-size: 20px;
+  font-weight: lighter;
 }
 
 /* Active link */
 .nav-item.active {
   background-color: white;
   color: #05668d;
-  margin-left: -1rem; /* Pull it outside of the sidebar */
-  padding-left: 1.5rem;
-  width: calc(100% + 1rem); /* Extend past the sidebar's right edge */
   z-index: 1;
   position: relative;
-}
-
-.icon {
-  font-size: 1.5rem;
-}
-
-/* Main Content */
-.content {
-  flex: 1;
-  padding: 2rem;
 }
 </style>
