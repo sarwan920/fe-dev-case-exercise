@@ -13,11 +13,7 @@
           ghost-class="ghost-card"
         >
           <template #item="{ element }">
-            <div
-              class="task-card"
-              :style="{ backgroundColor: element.color }"
-              @click="openTaskDetails(element)"
-            >
+            <div class="task-card" :style="{ backgroundColor: element.color }">
               {{ element.title }}
             </div>
           </template>
@@ -26,21 +22,17 @@
     </div>
 
     <!-- Task Details Modal -->
-    <div v-if="selectedTask" class="modal" @click.self="closeModal">
-      <div class="modal-content" :style="{ backgroundColor: selectedTask.color }">
-        <h2>Edit Task</h2>
-        <div class="modal-body">body</div>
-        <div class="modal-footer">
-          <button @click="saveTask" class="save-btn">Save</button>
-          <button @click="closeModal" class="cancel-btn">Cancel</button>
-        </div>
+    <Teleport to="body">
+      <div v-if="movedTask" class="modal" @click.self="closeModal">
+        <ConfirmationDialogue :task="movedTask" @close="closeModal" />
       </div>
-    </div>
+    </Teleport>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, Teleport } from 'vue'
+import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
 import draggable from 'vuedraggable'
 
 // Status setup
@@ -50,6 +42,7 @@ const statusLabels = {
   'in-progress': 'In Progress',
   done: 'Done',
 }
+const movedTask = ref(null)
 
 // Initial tasks
 const tasks = ref([
@@ -76,29 +69,12 @@ const tasksByStatus = (status) => tasks.value.filter((task) => task.status === s
 const handleTaskDrop = (added, newStatus) => {
   if (added && added.element) {
     added.element.status = newStatus
-    console.log('Task moved:', added)
+    movedTask.value = added.element
   }
-}
-
-// Task editing
-const selectedTask = ref(null)
-const originalTask = ref(null)
-
-const openTaskDetails = (task) => {
-  selectedTask.value = { ...task }
-  originalTask.value = task
 }
 
 const closeModal = () => {
-  selectedTask.value = null
-  originalTask.value = null
-}
-
-const saveTask = () => {
-  if (originalTask.value) {
-    Object.assign(originalTask.value, selectedTask.value)
-  }
-  closeModal()
+  movedTask.value = null
 }
 </script>
 
@@ -183,51 +159,7 @@ const saveTask = () => {
   align-items: center;
   z-index: 1000;
 }
-.modal-content {
-  padding: 25px;
-  border-radius: 8px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-.modal h2 {
-  margin-top: 0;
-  color: #212529;
-}
-.modal-body {
-  margin: 20px 0;
-}
 
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-}
-.save-btn {
-  padding: 8px 16px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.save-btn:hover {
-  background-color: #218838;
-}
-.cancel-btn {
-  padding: 8px 16px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.cancel-btn:hover {
-  background-color: #c82333;
-}
 .ghost-card {
   opacity: 0.5;
   background: #f8f9fa;
