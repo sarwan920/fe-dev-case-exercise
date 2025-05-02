@@ -46,15 +46,20 @@ const navItems: NavItem[] = [
   background-color: #05668d;
   color: white;
   width: 72px;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 72px;
+  max-width: 72px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .sidebar.expanded {
   width: 240px;
+  min-width: 240px;
+  max-width: 240px;
   align-items: flex-start;
 }
 
@@ -65,8 +70,8 @@ const navItems: NavItem[] = [
 
 .menu-icon {
   color: white;
-  height: 48px;
-  width: 48px;
+  height: 52px;
+  width: 52px;
   margin: 0 10px;
 }
 

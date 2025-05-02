@@ -128,10 +128,10 @@ const addNewTask = (status) => {
   flex-wrap: wrap;
   gap: 20px;
   justify-items: center;
-  align-items: start;
   margin-top: 20px;
   height: calc(100vh - 100px);
 }
+
 .column {
   border: 4px solid #28262c;
   padding: 36px 48px;
@@ -140,6 +140,7 @@ const addNewTask = (status) => {
   padding: 15px;
   height: 100%;
 }
+
 .column-title {
   margin-bottom: 15px;
   color: #495057;
@@ -156,10 +157,13 @@ const addNewTask = (status) => {
   border-radius: 6px;
   transition: background-color 0.3s;
 }
+
+@media (max-width: 1280px) {
+}
 .task-card {
   padding: 0 24px;
   height: 80px;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: lighter;
   border-radius: 6px;
@@ -242,5 +246,25 @@ const addNewTask = (status) => {
   opacity: 0.5;
   background: #f8f9fa;
   border: 2px dashed #adb5bd;
+}
+
+@media (max-width: 1280px) {
+  .columns {
+    height: auto;
+  }
+  .column {
+    width: 100%;
+  }
+  .task-list {
+    flex-direction: row;
+  }
+
+  .task-card {
+    width: 148px;
+    height: 160px;
+    padding: 16px 12px;
+    text-align: start;
+    font-size: 14px;
+  }
 }
 </style>
