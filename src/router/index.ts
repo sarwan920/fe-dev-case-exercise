@@ -14,18 +14,31 @@ const router = createRouter({
       path: '/tasks',
       name: 'Tasks',
       component: Tasks,
+      meta: {
+        title: 'Tasks',
+      },
     },
     {
       path: '/notifications',
       name: 'Notifications',
       component: Notifications,
+      meta: {
+        title: 'Notifications',
+      },
     },
     {
       path: '/settings',
       name: 'Settings',
       component: Settings,
+      meta: {
+        title: 'Settings',
+      },
     },
   ],
+})
+
+router.beforeEach((to, from) => {
+  document.title = (to.meta.title as string) || 'Default Title'
 })
 
 export default router
