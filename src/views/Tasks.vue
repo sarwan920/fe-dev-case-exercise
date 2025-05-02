@@ -34,7 +34,8 @@
 </template>
 
 <script setup>
-import { ref, Teleport } from 'vue'
+import { ref, Teleport, onMounted } from 'vue'
+import axios from 'axios'
 import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
 import draggable from 'vuedraggable'
 
@@ -48,22 +49,20 @@ const statusLabels = {
 const movedTask = ref(null)
 
 // Initial tasks
-const tasks = ref([
-  { title: 'Stay hungry, stay foolish.', color: '#A8DADC', status: 'to-do' },
-  { title: 'Simplicity is the ultimate sophistication.', color: '#F1FAEE', status: 'in-progress' },
-  { title: 'The only way out is through.', color: '#FFDDD2', status: 'to-do' },
-  { title: 'What we think, we become.', color: '#CDB4DB', status: 'done' },
-  { title: 'Dream big. Dare bigger.', color: '#F1FAEE', status: 'in-progress' },
-  { title: 'Everything you can imagine is real.', color: '#A8DADC', status: 'to-do' },
-  { title: 'Do one thing every day that scares you.', color: '#FFDDD2', status: 'done' },
-  {
-    title: 'Act as if what you do makes a difference. It does.',
-    color: '#CDB4DB',
-    status: 'in-progress',
-  },
-  { title: 'Be yourself; everyone else is already taken.', color: '#F1FAEE', status: 'to-do' },
-  { title: 'Turn your wounds into wisdom.', color: '#A8DADC', status: 'in-progress' },
-])
+const tasks = ref([])
+
+async function getTasks() {
+  try {
+    const response = await axios.get('https://q1z3telex7a9metry.denaliops.com/data.json')
+    tasks.value = response.data
+  } catch (error) {
+    console.error('Error fetching tasks:', error)
+  }
+}
+
+onMounted(() => {
+  getTasks()
+})
 
 // Method to return tasks by status
 const tasksByStatus = (status) => tasks.value.filter((task) => task.status === status)
