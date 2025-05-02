@@ -110,6 +110,7 @@ const closeModal = () => {
   color: #495057;
   font-size: 24px;
   font-weight: 500;
+  padding-left: 10px;
 }
 .task-list {
   min-height: 100px;
