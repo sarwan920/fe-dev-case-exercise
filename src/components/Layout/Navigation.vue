@@ -1,7 +1,7 @@
 <template>
   <div :class="['sidebar', { expanded: isExpanded }]">
     <div class="menu-toggle" @click="toggleSidebar">
-      <IconMenu />
+      <IconMenu class="menu-icon" />
     </div>
 
     <router-link
@@ -63,13 +63,22 @@ const navItems: NavItem[] = [
   margin-bottom: 20px;
 }
 
+.menu-icon {
+  color: white;
+  height: 48px;
+  width: 48px;
+  margin: 0 10px;
+}
+
 .icon-wrapper {
   display: inline-flex;
   justify-content: center;
 }
 .icon {
   color: white;
-  transition: color 0.3s ease;
+  height: 48px;
+  width: 48px;
+  margin: 0 10px;
 }
 
 .icon.active {
