@@ -100,20 +100,6 @@ const saveTask = () => {
   }
   closeModal()
 }
-
-const deleteTask = (task) => {
-  tasks.value = tasks.value.filter((t) => t !== task)
-}
-
-const addNewTask = (status) => {
-  const newTask = {
-    title: 'New Task',
-    color: '#F1FAEE',
-    status,
-  }
-  tasks.value.push(newTask)
-  openTaskDetails(newTask)
-}
 </script>
 
 <style scoped>
