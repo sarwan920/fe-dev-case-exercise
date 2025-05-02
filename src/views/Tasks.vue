@@ -1,32 +1,35 @@
 <template>
-  <div class="kanban-board">
-    <div class="columns">
-      <div class="column" v-for="status in statuses" :key="status">
-        <h2 class="column-title">{{ statusLabels[status] }}</h2>
-        <draggable
-          :list="tasksByStatus(status)"
-          group="tasks"
-          item-key="title"
-          @change="({ added }) => handleTaskDrop(added, status)"
-          class="task-list"
-          :animation="200"
-          ghost-class="ghost-card"
-        >
-          <template #item="{ element }">
-            <div class="task-card" :style="{ backgroundColor: element.color }">
-              {{ element.title }}
-            </div>
-          </template>
-        </draggable>
+  <div>
+    <h1 class="page-title">Tasks</h1>
+    <div class="kanban-board">
+      <div class="columns">
+        <div class="column" v-for="status in statuses" :key="status">
+          <h2 class="column-title">{{ statusLabels[status] }}</h2>
+          <draggable
+            :list="tasksByStatus(status)"
+            group="tasks"
+            item-key="title"
+            @change="({ added }) => handleTaskDrop(added, status)"
+            class="task-list"
+            :animation="200"
+            ghost-class="ghost-card"
+          >
+            <template #item="{ element }">
+              <div class="task-card" :style="{ backgroundColor: element.color }">
+                {{ element.title }}
+              </div>
+            </template>
+          </draggable>
+        </div>
       </div>
-    </div>
 
-    <!-- Task Details Modal -->
-    <Teleport to="body">
-      <div v-if="movedTask" class="modal" @click.self="closeModal">
-        <ConfirmationDialogue :task="movedTask" @close="closeModal" />
-      </div>
-    </Teleport>
+      <!-- Task Details Modal -->
+      <Teleport to="body">
+        <div v-if="movedTask" class="modal" @click.self="closeModal">
+          <ConfirmationDialogue :task="movedTask" @close="closeModal" />
+        </div>
+      </Teleport>
+    </div>
   </div>
 </template>
 
@@ -80,7 +83,7 @@ const closeModal = () => {
 
 <style scoped>
 .kanban-board {
-  padding: 20px;
+  padding: 16px;
   min-height: 100vh;
   width: 100%;
 }
