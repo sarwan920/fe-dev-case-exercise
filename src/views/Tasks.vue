@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1 class="page-title">Tasks</h1>
-    <div class="kanban-board">
+    <div v-if="loading" class="loading">Loading....</div>
+    <div v-else class="kanban-board">
       <div class="columns">
         <div class="column" v-for="status in statuses" :key="status">
           <h2 class="column-title">{{ statusLabels[status] }}</h2>
@@ -47,16 +48,20 @@ const statusLabels = {
   done: 'Done',
 }
 const movedTask = ref(null)
+const loading = ref(false)
 
 // Initial tasks
 const tasks = ref([])
 
 async function getTasks() {
+  loading.value = true
   try {
     const response = await axios.get('https://q1z3telex7a9metry.denaliops.com/data.json')
     tasks.value = response.data
+    loading.value = false
   } catch (error) {
     console.error('Error fetching tasks:', error)
+    loading.value = false
   }
 }
 
@@ -187,5 +192,10 @@ const closeModal = () => {
     text-align: start;
     font-size: 14px;
   }
+}
+
+.loading {
+  padding: 20px;
+  font-size: larger;
 }
 </style>
