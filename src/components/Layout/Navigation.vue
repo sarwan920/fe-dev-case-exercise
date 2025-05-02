@@ -43,7 +43,7 @@ const navItems: NavItem[] = [
 
 <style scoped>
 .sidebar {
-  background-color: #05668d;
+  background-color: var(--lapis-color);
   color: white;
   width: 72px;
   min-width: 72px;
@@ -87,7 +87,7 @@ const navItems: NavItem[] = [
 }
 
 .icon.active {
-  color: #05668d;
+  color: var(--lapis-color);
 }
 .nav-item {
   display: flex;
@@ -107,7 +107,7 @@ const navItems: NavItem[] = [
 /* Active link */
 .nav-item.active {
   background-color: white;
-  color: #05668d;
+  color: var(--lapis-color);
   z-index: 1;
   position: relative;
 }

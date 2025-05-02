@@ -41,7 +41,7 @@ const closeModal = () => {
 .modal-header {
   display: flex;
   border-radius: 4px 4px 0 0;
-  background-color: #05668d;
+  background-color: var(--lapis-color);
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dee2e6;
@@ -67,7 +67,7 @@ const closeModal = () => {
 .close-btn {
   padding: 8px 8px;
   background-color: transparent;
-  color: #05668d;
+  color: var(--lapis-color);
   border: none;
   border-radius: 4px;
   cursor: pointer;

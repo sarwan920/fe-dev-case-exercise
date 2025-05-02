@@ -97,7 +97,7 @@ const closeModal = () => {
 }
 
 .column {
-  border: 4px solid #28262c;
+  border: 4px solid var(--text-color);
   padding: 36px 48px;
   width: 400px;
   border-radius: 8px;
@@ -134,7 +134,7 @@ const closeModal = () => {
   align-items: center;
   place-content: center;
   cursor: pointer;
-  border: 2px solid #28262c;
+  border: 2px solid var(--text-color);
   transition:
     transform 0.2s,
     box-shadow 0.2s;
