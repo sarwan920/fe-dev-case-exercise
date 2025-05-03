@@ -6,7 +6,7 @@
       <div class="columns">
         <div class="column" v-for="status in statuses" :key="status">
           <h2 class="column-title">{{ statusLabels[status] }}</h2>
-          <div v-if="tasksByStatus(status).length === 0" class="task-list">
+          <div v-if="tasksByStatus(status).length === 0">
             <p>No tasks available</p>
           </div>
           <draggable
