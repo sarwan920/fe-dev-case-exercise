@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, Teleport, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
 import draggable from 'vuedraggable'
@@ -76,6 +76,8 @@ const tasksByStatus = (status) => tasks.value.filter((task) => task.status === s
 const handleTaskDrop = (added, newStatus) => {
   if (added && added.element) {
     added.element.status = newStatus
+    console.log(movedTask.value)
+    console.log(added.element)
     movedTask.value = added.element
   }
 }
