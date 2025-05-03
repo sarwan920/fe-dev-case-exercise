@@ -50,7 +50,6 @@ const statusLabels = {
 const movedTask = ref(null)
 const loading = ref(false)
 
-// Initial tasks
 const tasks = ref([])
 
 async function getTasks() {
@@ -69,16 +68,18 @@ onMounted(() => {
   getTasks()
 })
 
-// Method to return tasks by status
 const tasksByStatus = (status) => tasks.value.filter((task) => task.status === status)
 
-// Handle drop between columns
 const handleTaskDrop = (added, newStatus) => {
-  if (added && added.element) {
-    added.element.status = newStatus
-    console.log(movedTask.value)
-    console.log(added.element)
-    movedTask.value = added.element
+  if (added?.element) {
+    const task = added.element
+    task.status = newStatus
+
+    const index = tasks.value.findIndex((t) => t.title === task.title)
+    if (index !== -1) tasks.value.splice(index, 1)
+    tasks.value.unshift(task)
+
+    movedTask.value = task
   }
 }
 
