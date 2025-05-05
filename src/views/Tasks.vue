@@ -134,8 +134,6 @@ const closeModal = () => {
   transition: background-color 0.3s;
 }
 
-@media (max-width: 1280px) {
-}
 .task-card {
   padding: 0 24px;
   height: 80px;
@@ -180,7 +178,7 @@ const closeModal = () => {
   border: 2px dashed #adb5bd;
 }
 
-@media (max-width: 1280px) {
+@media (orientation: landscape) and ((max-width: 1280px) or (max-height: 1280px)) {
   .columns {
     height: auto;
   }
